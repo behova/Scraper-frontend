@@ -52,7 +52,6 @@ const Feed = () => {
                 "https://www.yuare.gay/public/" +
                 image.thumbURL.substring(image.thumbURL.lastIndexOf("/") + 1)
               }
-              name={image.name}
             />
           ))}
 
