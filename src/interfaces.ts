@@ -5,3 +5,8 @@ export interface DB_Image {
   source: string;
   pallet: string;
 }
+
+export interface ApiPageResponse {
+  images: DB_Image[];
+  nextPage: number | undefined;
+}

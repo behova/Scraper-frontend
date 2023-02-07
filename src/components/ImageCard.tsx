@@ -9,7 +9,7 @@ interface Props {
 const ImageCard: React.FC<Props> = ({ image, name }) => {
   return (
     <div className="max-w-sm flex flex-col overflow-hidden rounded-lg bg-stone-500 shadow">
-      <img className="h-56 w-full object-cover" src={cat} />
+      <img className="h-56 w-full object-cover" src={image} />
 
       <div className="flex flex-row space-x-3 px-6 py-4 bg-stone-800">
         <button
@@ -25,7 +25,7 @@ const ImageCard: React.FC<Props> = ({ image, name }) => {
           border border-transparent rounded-lg focus:outline-none 
           bg-stone-700 text-rose-300"
         >
-          Name Here
+          {name}
         </h4>
         <h4
           className="py-2 px-4 text-sm font-medium 

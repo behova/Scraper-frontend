@@ -1,14 +1,15 @@
 import axios from "axios";
 import { AxiosError } from "axios";
-import { DB_Image } from "../interfaces";
+import { ApiPageResponse, DB_Image } from "../interfaces";
 
 export async function fetchImagesByPage(page: number) {
   try {
-    const axiosResponse = await axios.get<DB_Image[]>(
+    const axiosResponse = await axios.get<ApiPageResponse>(
       `https://www.yuare.gay/${page}`
     );
+    const result = axiosResponse.data;
 
-    return axiosResponse;
+    return result;
   } catch (error: any | AxiosError) {
     if (error.response) {
       // Request made and server responded
