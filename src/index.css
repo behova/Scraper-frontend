@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .sidebar-icon {
+    @apply relative flex items-center justify-center 
+    h-12 w-12 mt-2 mb-2 mx-auto
+     bg-stone-700 text-rose-300
+     hover:bg-rose-300 hover:text-rose-100
+     rounded-2xl hover:rounded-xl
+     cursor-pointer;
+  }
+
+  .sidebar-tooltip {
+    @apply absolute w-auto p-2 m-2 min-w-max left-14
+    rounded-md shadow-md
+    bg-stone-700 text-rose-300
+    text-xs font-bold
+    transition-all duration-75 scale-0 origin-left;
+  }
+}
