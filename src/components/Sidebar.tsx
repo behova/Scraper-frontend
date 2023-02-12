@@ -1,24 +1,32 @@
 import { ReactElement } from "react";
 import { Link } from "react-router-dom";
 import { IconType } from "react-icons/lib";
-import { FaTrash, FaRegEye, FaDownload, FaHome } from "react-icons/fa";
-import cat from "../assets/cat.gif";
+import cat from "../assets/paraniod.svg";
 
 const SideBar = () => {
   return (
-    <div className="top-0 left-0 h-screen w-20 flex-none flex flex-col bg-stone-800 text-stone-100 shadow-lg">
-      <Link to="/">
-        <img className="border-4 rounded-2xl border-rose-300" src={cat} />
-      </Link>
-      <Link to="/feed">
-        <SideBarIcon icon={<FaHome size={28} />} text="Feed" />
-      </Link>
-      <Link to="/gallery">
-        <SideBarIcon icon={<FaRegEye size={28} />} text="View Selected" />
-      </Link>
-      <SideBarIcon icon={<FaDownload size={28} />} text="Download Selected" />
-      <SideBarIcon icon={<FaTrash size={28} />} text="Trash Selection" />
-    </div>
+    <header className="sticky z-30 left-0 top-0 w-full bg-para-pink text-stone-100 shadow-lg rounded-3xl">
+      <div className="flex flex-row justify-between align-middle">
+        <div className="relative bg-para-pink pr-[60%]">
+          <Link to="/feed">
+            <img
+              className="absolute top-0 h-full w-full object-cover"
+              src={cat}
+            />
+          </Link>
+        </div>
+
+        <div className="flex items-center pr-5">
+          <div className="flex border border-purple-200 rounded">
+            <input
+              type="text"
+              className="block w-full px-4 py-2 text-para-pink bg-white border rounded-md focus:border-para-pink focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
+              placeholder="Search..."
+            />
+          </div>
+        </div>
+      </div>
+    </header>
   );
 };
 

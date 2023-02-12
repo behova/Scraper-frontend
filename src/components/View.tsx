@@ -3,7 +3,7 @@ interface Props {
 }
 
 const View: React.FC<Props> = ({ children }) => {
-  return <div className="min-h-full min-w-full">{children}</div>;
+  return <div className="h-full w-full overflow-scroll">{children}</div>;
 };
 
 export default View;

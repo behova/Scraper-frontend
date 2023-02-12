@@ -11,7 +11,7 @@ function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <div className="min-h-screen min-w-screen flex flex-row">
+    <div className="flex flex-col min-h-screen min-w-screen">
       <SideBar />
       <View>
         <Routes>
