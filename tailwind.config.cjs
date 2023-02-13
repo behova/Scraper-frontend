@@ -6,9 +6,6 @@ module.exports = {
       gridTemplateColumns: {
         fluid: "repeat(auto-fit, minmax(10rem, 1fr))",
       },
-      // backgroundImage: {
-      //   'header': "url('/img/hero-pattern.svg')",
-      // }
       colors: {
         "para-pink": "#d26d79",
       },

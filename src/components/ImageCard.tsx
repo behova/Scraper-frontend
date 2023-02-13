@@ -1,5 +1,4 @@
-import cat from "../assets/cat.gif";
-import { FaPlus } from "react-icons/fa";
+import loadImage from "../assets/calicoCat.gif";
 
 interface Props {
   image?: string;
@@ -9,7 +8,17 @@ interface Props {
 const ImageCard: React.FC<Props> = ({ image, name }) => {
   return (
     <div className="max-w-sm flex flex-col overflow-hidden rounded-lg bg-stone-500 shadow">
-      <div className="relative bg-stone-500 pb-[80%]">
+      <div className="relative bg-rose-200 pb-[80%]">
+        <div
+          className="
+          absolute top-0 h-full w-full object-cover
+          animate-bounce
+          text-center
+          flex items-center justify-center"
+          role="status"
+        >
+          &#127775; &#127775; &#127775;
+        </div>
         <img
           className="absolute top-0 h-full w-full object-cover"
           src={image}

@@ -1,13 +1,11 @@
 interface Props {
   image?: string;
-  status?: string;
   hasNextPage?: boolean;
   isFetchingNextPage?: boolean;
 }
 
 const LoadingCard: React.FC<Props> = ({
   image,
-  status,
   hasNextPage,
   isFetchingNextPage,
 }) => {

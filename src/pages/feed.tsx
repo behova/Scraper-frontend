@@ -1,18 +1,12 @@
-import {
-  InfiniteData,
-  QueryFunctionContext,
-  useInfiniteQuery,
-  useQuery,
-} from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import ImageCard from "../components/ImageCard";
 import { fetchImagesByPage } from "../hooks/api";
-import { ApiPageResponse, ApiSearchResponse } from "../interfaces";
+import { ApiPageResponse } from "../interfaces";
 import { useInView } from "react-intersection-observer";
 import React from "react";
 import whiteCat from "../assets/whiteCat.gif";
 import LoadingCard from "../components/LoadingCard";
 import { fetchSearch } from "../hooks/api";
-import SearchResults from "./searchResults";
 
 interface IState {
   query: string;
@@ -48,7 +42,7 @@ const Feed = (query: IState) => {
     fetchNextPage,
   } = useInfiniteQuery<ApiPageResponse, Error>({
     keepPreviousData: true,
-    queryKey: ["infinite", ["search"], query],
+    queryKey: ["infinite", "search", query],
     getNextPageParam: (prevData) => prevData.nextPage,
     queryFn: ({ pageParam = 1 }) => fetchImages(pageParam, query),
   });
@@ -89,7 +83,6 @@ const Feed = (query: IState) => {
         <div ref={ref} onClick={() => fetchNextPage()}>
           <LoadingCard
             image={whiteCat}
-            status="loading"
             hasNextPage={hasNextPage}
             isFetchingNextPage={isFetchingNextPage}
           />
