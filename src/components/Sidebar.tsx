@@ -1,6 +1,4 @@
-import { Dispatch, ReactElement, SetStateAction, useRef } from "react";
 import { Link } from "react-router-dom";
-import { IconType } from "react-icons/lib";
 import cat from "../assets/paraniod.svg";
 
 interface IProps {

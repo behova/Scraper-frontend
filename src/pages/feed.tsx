@@ -53,7 +53,14 @@ const Feed = (query: IState) => {
     }
   }, [inView]);
 
-  if (status === "loading") return <h1>Loading....</h1>;
+  if (status === "loading")
+    return (
+      <LoadingCard
+        image={whiteCat}
+        hasNextPage={hasNextPage}
+        isFetchingNextPage={isFetchingNextPage}
+      />
+    );
   if (status === "error") return <h1>{JSON.stringify(error)}</h1>;
   if (status === "success") {
     return (

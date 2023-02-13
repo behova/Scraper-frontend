@@ -4,7 +4,6 @@ import "./App.css";
 import SideBar from "./components/Sidebar";
 import View from "./components/View";
 import Feed from "./pages/feed";
-import Gallery from "./pages/gallery";
 import Landing from "./pages/landing";
 
 function App() {
