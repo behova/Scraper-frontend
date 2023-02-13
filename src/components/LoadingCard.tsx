@@ -30,7 +30,7 @@ const LoadingCard: React.FC<Props> = ({
           {isFetchingNextPage
             ? "Loading more..."
             : hasNextPage
-            ? "Load Newer"
+            ? "Load New"
             : "All out of images!"}
         </button>
       </div>

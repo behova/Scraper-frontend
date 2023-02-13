@@ -6,18 +6,35 @@ import {
 } from "@tanstack/react-query";
 import ImageCard from "../components/ImageCard";
 import { fetchImagesByPage } from "../hooks/api";
-import { ApiPageResponse } from "../interfaces";
+import { ApiPageResponse, ApiSearchResponse } from "../interfaces";
 import { useInView } from "react-intersection-observer";
 import React from "react";
 import whiteCat from "../assets/whiteCat.gif";
 import LoadingCard from "../components/LoadingCard";
+import { fetchSearch } from "../hooks/api";
+import SearchResults from "./searchResults";
 
-const Feed = () => {
-  const fetchImages = async (page: number) => {
-    const result = await fetchImagesByPage(page);
-    if (result) {
-      return result;
-    } else throw error;
+interface IState {
+  query: string;
+}
+
+// add if to check for search query here? then pass back to ruse infinite
+const Feed = (query: IState) => {
+  const fetchImages = async (page: number, query?: IState) => {
+    if (query && query.query != "") {
+      console.log("query:", query.query);
+      const result = await fetchSearch(query.query);
+      if (result) {
+        return result;
+        //this is throwing the wrong error here
+      } else throw error;
+    } else {
+      const result = await fetchImagesByPage(page);
+      if (result) {
+        return result;
+        //this is throwing the wrong error here
+      } else throw error;
+    }
   };
 
   const { ref, inView } = useInView();
@@ -31,9 +48,9 @@ const Feed = () => {
     fetchNextPage,
   } = useInfiniteQuery<ApiPageResponse, Error>({
     keepPreviousData: true,
-    queryKey: ["infinite"],
+    queryKey: ["infinite", ["search"], query],
     getNextPageParam: (prevData) => prevData.nextPage,
-    queryFn: ({ pageParam = 1 }) => fetchImages(pageParam),
+    queryFn: ({ pageParam = 1 }) => fetchImages(pageParam, query),
   });
 
   React.useEffect(() => {
@@ -45,7 +62,6 @@ const Feed = () => {
   if (status === "loading") return <h1>Loading....</h1>;
   if (status === "error") return <h1>{JSON.stringify(error)}</h1>;
   if (status === "success") {
-    // console.log(hasNextPage, data);
     return (
       <div
         className="
@@ -69,21 +85,6 @@ const Feed = () => {
               }
             />
           ))}
-        {/* <div className="flex flex-col">
-          <button
-            ref={ref}
-            onClick={() => fetchNextPage()}
-            disabled={!hasNextPage || isFetchingNextPage}
-            className="rounded-full bg-para-pink text-rose-100 mt-4 p-3 "
-          >
-            {isFetchingNextPage
-              ? "Loading more..."
-              : hasNextPage
-              ? "Load Newer"
-              : "Nothing more to load"}
-          </button>
-          <img src={whiteCat} className="h-1/12" />
-        </div> */}
 
         <div ref={ref} onClick={() => fetchNextPage()}>
           <LoadingCard

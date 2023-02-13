@@ -10,3 +10,6 @@ export interface ApiPageResponse {
   images: DB_Image[];
   nextPage: number | undefined;
 }
+export interface ApiSearchResponse {
+  images: DB_Image[];
+}

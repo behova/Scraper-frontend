@@ -8,15 +8,14 @@ import Gallery from "./pages/gallery";
 import Landing from "./pages/landing";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [query, setQuery] = useState<string>("");
 
   return (
     <div className="flex flex-col min-h-screen min-w-screen">
-      <SideBar />
+      <SideBar setQuery={setQuery} query={query} />
       <View>
         <Routes>
-          <Route path="/feed" element={<Feed />} />
-          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/feed" element={<Feed query={query} />} />
           <Route path="/" element={<Landing />} />
         </Routes>
       </View>

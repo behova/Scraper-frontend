@@ -1,6 +1,6 @@
 import axios from "axios";
 import { AxiosError } from "axios";
-import { ApiPageResponse, DB_Image } from "../interfaces";
+import { ApiPageResponse, ApiSearchResponse, DB_Image } from "../interfaces";
 
 export async function fetchImagesByPage(page: number) {
   try {
@@ -24,12 +24,22 @@ export async function fetchImagesByPage(page: number) {
   }
 }
 
-async function fetchImageCount() {
+export async function fetchSearch(query: string) {
   //need to implement total image count in api
   try {
-    const axiosResponse = await axios.get<DB_Image[]>(`https://www.yuare.gay/`);
+    const axiosResponse = await axios.post<DB_Image[]>(
+      "https://www.yuare.gay/search",
+      { query }
+    );
+    let element: ApiPageResponse = { images: [], nextPage: undefined };
 
-    return axiosResponse;
+    for (let i in axiosResponse.data) {
+      element.images.push(axiosResponse.data[i]);
+    }
+
+    const result = element;
+
+    return result;
   } catch (error: any | AxiosError) {
     if (error.response) {
       // Request made and server responded
