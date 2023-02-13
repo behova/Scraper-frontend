@@ -13,3 +13,7 @@ export interface ApiPageResponse {
 export interface ApiSearchResponse {
   images: DB_Image[];
 }
+
+export interface IState {
+  query: string;
+}

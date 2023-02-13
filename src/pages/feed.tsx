@@ -1,37 +1,17 @@
+import { IState } from "../interfaces";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import fetchImages from "../hooks/fetchImages";
 import ImageCard from "../components/ImageCard";
-import { fetchImagesByPage } from "../hooks/api";
 import { ApiPageResponse } from "../interfaces";
 import { useInView } from "react-intersection-observer";
-import React from "react";
+import React, { useState } from "react";
 import whiteCat from "../assets/whiteCat.gif";
 import LoadingCard from "../components/LoadingCard";
-import { fetchSearch } from "../hooks/api";
+import ImageModal from "../components/ImageModal";
 
-interface IState {
-  query: string;
-}
-
-// add if to check for search query here? then pass back to ruse infinite
 const Feed = (query: IState) => {
-  const fetchImages = async (page: number, query?: IState) => {
-    if (query && query.query != "") {
-      console.log("query:", query.query);
-      const result = await fetchSearch(query.query);
-      if (result) {
-        return result;
-        //this is throwing the wrong error here
-      } else throw error;
-    } else {
-      const result = await fetchImagesByPage(page);
-      if (result) {
-        return result;
-        //this is throwing the wrong error here
-      } else throw error;
-    }
-  };
-
-  const { ref, inView } = useInView();
+  const [showModal, setShowModal] = useState(false);
+  const [modalSource, setModalSource] = useState("");
 
   const {
     status,
@@ -46,6 +26,9 @@ const Feed = (query: IState) => {
     getNextPageParam: (prevData) => prevData.nextPage,
     queryFn: ({ pageParam = 1 }) => fetchImages(pageParam, query),
   });
+
+  const { ref, inView } = useInView();
+  const handleOnClose = () => setShowModal(false);
 
   React.useEffect(() => {
     if (inView) {
@@ -74,17 +57,28 @@ const Feed = (query: IState) => {
         {data.pages
           .flatMap((data) => data.images)
           .map((image) => (
-            <ImageCard
-              image={
-                "https://www.yuare.gay/public/" +
-                image.thumbURL.substring(image.thumbURL.lastIndexOf("/") + 1)
-              }
-              name={
-                image.name.length < 10
-                  ? image.name
-                  : image.name.substring(0, 10) + "..."
-              }
-            />
+            <div
+              onClick={() => {
+                setShowModal(true);
+                setModalSource(
+                  `https://www.yuare.gay/public/${image.thumbURL.substring(
+                    image.thumbURL.lastIndexOf("/") + 1
+                  )}`
+                );
+              }}
+            >
+              <ImageCard
+                image={
+                  "https://www.yuare.gay/public/" +
+                  image.thumbURL.substring(image.thumbURL.lastIndexOf("/") + 1)
+                }
+                name={
+                  image.name.length < 10
+                    ? image.name
+                    : image.name.substring(0, 10) + "..."
+                }
+              />
+            </div>
           ))}
 
         <div ref={ref} onClick={() => fetchNextPage()}>
@@ -94,6 +88,11 @@ const Feed = (query: IState) => {
             isFetchingNextPage={isFetchingNextPage}
           />
         </div>
+        <ImageModal
+          onClose={handleOnClose}
+          visible={showModal}
+          imageSource={modalSource}
+        />
       </div>
     );
   } else return <h1>Something went wrong.... :(</h1>;
