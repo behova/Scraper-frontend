@@ -15,7 +15,7 @@ const SideBar = (props: IProps) => {
     <header className="sticky z-30 left-0 top-0 w-full bg-para-pink text-stone-100 shadow-lg">
       <div className="flex flex-row justify-between align-middle">
         <div className="relative bg-para-pink pr-[60%]">
-          <Link to="/feed">
+          <Link to="/">
             <img
               className="absolute top-0 h-full w-full object-cover"
               src={cat}

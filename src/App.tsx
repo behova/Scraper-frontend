@@ -10,7 +10,7 @@ function App() {
   const [query, setQuery] = useState<string>("");
 
   return (
-    <div className="flex flex-col min-h-screen min-w-screen">
+    <div className="flex flex-col min-h-screen min-w-screen bg-stone-200">
       <SideBar setQuery={setQuery} query={query} />
       <View>
         <Routes>
