@@ -1,14 +1,13 @@
 export interface DB_Image {
-  thumbURL: string;
-  fullURL: string;
-  name: string;
-  source: string;
+  fileName: string;
+  sourceName: string;
   pallet: string;
+  dimensions: string;
 }
 
 export interface ApiPageResponse {
-  images: DB_Image[];
   nextPage: number | undefined;
+  images: DB_Image[];
 }
 export interface ApiSearchResponse {
   images: DB_Image[];

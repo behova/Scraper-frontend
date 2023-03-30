@@ -27,17 +27,12 @@ export async function fetchImagesByPage(page: number) {
 export async function fetchSearch(query: string) {
   //need to implement total image count in api
   try {
-    const axiosResponse = await axios.post<DB_Image[]>(
+    const axiosResponse = await axios.post<ApiPageResponse>(
       "https://www.yuare.gay/search",
       { query }
     );
-    let element: ApiPageResponse = { images: [], nextPage: undefined };
 
-    for (let i in axiosResponse.data) {
-      element.images.push(axiosResponse.data[i]);
-    }
-
-    const result = element;
+    const result = axiosResponse.data;
 
     return result;
   } catch (error: any | AxiosError) {

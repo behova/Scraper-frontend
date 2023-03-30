@@ -24,7 +24,7 @@ const Feed = (query: IState) => {
     keepPreviousData: true,
     queryKey: ["infinite", "search", query],
     getNextPageParam: (prevData) => prevData.nextPage,
-    queryFn: ({ pageParam = 1 }) => fetchImages(pageParam, query),
+    queryFn: ({ pageParam = 0 }) => fetchImages(pageParam, query),
   });
 
   const { ref, inView } = useInView();
@@ -61,22 +61,19 @@ const Feed = (query: IState) => {
               onClick={() => {
                 setShowModal(true);
                 setModalSource(
-                  `https://www.yuare.gay/public/${image.thumbURL.substring(
-                    image.thumbURL.lastIndexOf("/") + 1
-                  )}`
+                  `https://www.yuare.gay/public/${image.fileName}.png`
                 );
               }}
             >
               <ImageCard
-                image={
-                  "https://www.yuare.gay/public/" +
-                  image.thumbURL.substring(image.thumbURL.lastIndexOf("/") + 1)
-                }
+                image={`https://www.yuare.gay/public/${image.fileName}-thumb.jpeg`}
                 name={
-                  image.name.length < 10
-                    ? image.name
-                    : image.name.substring(0, 10) + "..."
+                  image.sourceName.length < 15
+                    ? image.sourceName
+                    : image.sourceName.substring(0, 15) + "..."
                 }
+                dimensions={image.dimensions}
+                pallet={image.pallet}
               />
             </div>
           ))}

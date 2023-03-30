@@ -1,4 +1,4 @@
-import React, { MouseEvent } from "react";
+import React from "react";
 
 interface ImageModalProps {
   visible: boolean;
@@ -17,11 +17,11 @@ const ImageModal = ({ visible, onClose, imageSource }: ImageModalProps) => {
     <div
       onClick={handleOnClose}
       id="modal"
-      className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm
+      className="fixed inset-0 z-50 bg-black bg-opacity-30 backdrop-blur-sm
     flex justify-center items-center"
     >
-      <div className="bg-white p-2 rounded">
-        <img src={imageSource} />
+      <div className="bg-stone-200 p-2 rounded m-8">
+        <img className="max-h-screen max-w-full" src={imageSource} />
       </div>
     </div>
   );
