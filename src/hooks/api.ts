@@ -5,7 +5,7 @@ import { ApiPageResponse, ApiSearchResponse, DB_Image } from "../interfaces";
 export async function fetchImagesByPage(page: number) {
   try {
     const axiosResponse = await axios.get<ApiPageResponse>(
-      `https://www.yuare.gay/${page}`
+      `https://www.yuare.gay/api/${page}`
     );
     const result = axiosResponse.data;
 
@@ -28,7 +28,7 @@ export async function fetchSearch(query: string) {
   //need to implement total image count in api
   try {
     const axiosResponse = await axios.post<ApiPageResponse>(
-      "https://www.yuare.gay/search",
+      "https://www.yuare.gay/api/search",
       { query }
     );
 
