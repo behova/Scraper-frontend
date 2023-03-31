@@ -61,12 +61,12 @@ const Feed = (query: IState) => {
               onClick={() => {
                 setShowModal(true);
                 setModalSource(
-                  `https://www.yuare.gay/public/${image.fileName}.png`
+                  `https://www.yuare.gay/api/public/${image.fileName}.png`
                 );
               }}
             >
               <ImageCard
-                image={`https://www.yuare.gay/public/${image.fileName}-thumb.jpeg`}
+                image={`https://www.yuare.gay/api/public/${image.fileName}-thumb.jpeg`}
                 name={
                   image.sourceName.length < 15
                     ? image.sourceName
